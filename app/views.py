@@ -62,7 +62,7 @@ def after_login(resp):
 		return redirect(url_for('login'))
 	user = User.query.filter_by(email=resp.email).first()
 	if user is None:
-		name = resp.name
+		name = resp.nickname
 		if name is None or name == "":
 			name = resp.email.split('@')[0]
 		user = User(name=name, email=resp.email)
