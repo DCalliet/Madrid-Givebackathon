@@ -1,5 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
+    <script type="text/javascript">
+      var set_openid = function(openid, pr){
+      u = openid.search('<username>');
+      if ( u != -1) {
+        user = prompt('Enter your ' + pr + ' username:');
+        openid = openid.substr(0, u) + user;
+      }
+        form = document.forms['login'];
+        form.elements['openid'].value = openid;
+      }
+  </script>
 <!-- Custom styles for this template -->
     <link href="static/css/cover.css" rel="stylesheet">
 	
@@ -48,5 +59,7 @@
       </div>
 
     </div>
+
+
 
 {% endblock %}
