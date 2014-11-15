@@ -22,33 +22,36 @@ def load_user(id):
 @app.route('/index')
 @login_required
 def index():
+	user = g.user
 	data = [
 		{name:"Akeda", total: "340.35", contribs:[{name:"Learn 2 Live", desc:"Help kids and stuff", amount:40}, {name:"Carjacking", desc:"Refurbished cars", amount:32.11}, {name:"Hopelessly Homeless", desc:"Homeless People", amount:22.60}, {name:"Hungry Hippos", desc:"Feed People", amount:20.45}]}
 	]
 	return render_template('index.html', title="home", user=data)
 
-@app.route('/')
 @app.route('/impact')
 @login_required
 def impact():
 	return render_template('impact.html', title="impact")
 
-@app.route('/')
 @app.route('/news')
 @login_required
 def news():
 	return render_template('news.html', title="news")
 
-@app.route('/')
 @app.route('/give')
 @login_required
 def give():
 	return render_template('give.html', title='give')
 
-@app.route('/')
 @app.route('/login')
 def login():
-	return render_template('login.html', title='login')
+	if g.user is not None and g.user.is_authenticated():
+		return redirect(url_for('index'))
+	form = LoginForm()
+	if form.validate_on_submit():
+		session['remember_me'] = form.remember_me.data
+		return oid.try_login(form.openid.data, ask_for=['nickname', 'email'])
+	return render_template('login.html', form=form, providers=app.config['OPENID_PROVIDERS'], title='login')
 
 @oid.after_login
 def after_login(resp):
