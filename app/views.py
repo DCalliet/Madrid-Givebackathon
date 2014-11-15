@@ -29,7 +29,7 @@ def index():
 	data = [
 		{'name':"Akeda", 'total': "340.35", 'contribs':[{'name':"Learn 2 Live", 'desc':"Help kids and stuff", 'amount':40}, {'name':"Carjacking", 'desc':"Refurbished cars", 'amount':32.11}, {'name':"Hopelessly Homeless", 'desc':"Homeless People", 'amount':22.60}, {'name':"Hungry Hippos", 'desc':"Feed People", 'amount':20.45}]}
 	]
-	return render_template('index.html', title="home", user=data[0])
+	return render_template('index.html', title="home", user=data)
 
 @app.route('/impact')
 @login_required
@@ -68,6 +68,7 @@ def after_login(resp):
 		name = resp.nickname
 		if name is None or name == "":
 			name = resp.email.split('@')[0]
+			print 'hi'
 		user = User(name=name, email=resp.email, amount=0)
 		db.session.add(user)
 		db.session.commit()
@@ -75,7 +76,6 @@ def after_login(resp):
 	if 'remember_me' in session:
 		remember_me = session['remember_me']
 		session.pop('remember_me', None)
-	print user
 	login_user(user, remember = remember_me)
 	return redirect(request.args.get('next') or url_for('index'))
 
