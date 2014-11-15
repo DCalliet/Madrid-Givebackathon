@@ -23,4 +23,4 @@ class User(db.Model):
 			return str(self.id)
 
 	def __repr__(self):
-		return '<User ' + str(self.nickname) + " amount: " + str(self.amount) + ">"
+		return '<User ' + str(self.name) + " amount: " + str(self.amount) + ">"

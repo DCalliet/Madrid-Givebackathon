@@ -24,7 +24,7 @@ def load_user(id):
 def index():
 	user = g.user
 	data = [
-		{name:"Akeda", total: "340.35", contribs:[{name:"Learn 2 Live", desc:"Help kids and stuff", amount:40}, {name:"Carjacking", desc:"Refurbished cars", amount:32.11}, {name:"Hopelessly Homeless", desc:"Homeless People", amount:22.60}, {name:"Hungry Hippos", desc:"Feed People", amount:20.45}]}
+		{'name':"Akeda", 'total': "340.35", 'contribs':[{'name':"Learn 2 Live", 'desc':"Help kids and stuff", 'amount':40}, {'name':"Carjacking", 'desc':"Refurbished cars", 'amount':32.11}, {'name':"Hopelessly Homeless", 'desc':"Homeless People", 'amount':22.60}, {'name':"Hungry Hippos", 'desc':"Feed People", 'amount':20.45}]}
 	]
 	return render_template('index.html', title="home", user=data)
 
@@ -61,10 +61,10 @@ def after_login(resp):
 		return redirect(url_for('login'))
 	user = User.query.filter_by(email=resp.email).first()
 	if user is None:
-		nickname = resp.nickname
-		if nickname is None or nickname == "":
-			nickname = resp.email.split('@')[0]
-		user = User(nickname=nickname, email=resp.email)
+		name = resp.name
+		if name is None or name == "":
+			name = resp.email.split('@')[0]
+		user = User(name=name, email=resp.email)
 		db.session.add(user)
 		db.session.commit()
 	remember_me = False
