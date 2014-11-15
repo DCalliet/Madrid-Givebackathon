@@ -1,0 +1,17 @@
+<html>
+	<head>
+		{% if title %}
+		<title>{{ title }} - Pennies for Change</title>
+		{% else %}
+		<title> Pennies for Change</title>
+		{%  endif %}
+	</head>
+	<body>
+		<div>Pennies for Change: 
+			<a href="{{ url_for('index') }}">Home</a>
+		</div>
+		<hr>
+
+		{% block content %}{% endblock %}
+	</body>
+</html>
