@@ -1,6 +1,57 @@
 {% extends "base.html" %}
 {% block content %}
-	<h1> Hi!</h1>
+<!-- Custom styles for this template -->
+    <link href="static/css/cover.css" rel="stylesheet">
 	
-	<p>Login Page</p>
+ <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand"></h3>
+              <nav>
+               
+              </nav>
+            </div>
+          </div>
+		  
+		  <form action="" method="post" name="login">
+    {{ form.hidden_tag() }}
+    <p>
+        Please enter your OpenID, or select one of the providers below:<br>
+        {{ form.openid(size=80) }}
+        {% for error in form.openid.errors %}
+          <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+        |{% for pr in providers %}
+          <a href="javascript:set_openid('{{ pr.url }}', '{{ pr.name }}');">{{ pr.name }}</a> |
+        {% endfor %}
+    </p>
+    <p>{{ form.remember_me }} Remember Me</p>
+    <p><input type="submit" value="Sign In"></p>
+</form>
+
+          <div class="inner cover">
+            <h1 class="cover-heading">Cover your page.</h1>
+            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+            <p class="lead">
+              <a href="#" class="btn btn-lg btn-default">Learn more</a>
+            </p>
+          </div>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
 {% endblock %}
