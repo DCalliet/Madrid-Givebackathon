@@ -1,11 +1,45 @@
 /* Custom CSS for Project One */
 
 
+
 form input{
 	color: black;
 }
+
 .logo {
 	width: 30px;
 	height: 30px;
+}
+
+.circle{
+	
+	width:350px;
+	height:350px;
+	border-radius:50%;
+	font-size:50px;
+	color:white;
+	line-height:350px;
+	text-align:center;
+	background:blue;
+	
+}
+
+
+.col-md-6{
+width: 100%;
+text-align: center;
+}
+
+.youve_donated{
+padding: 20px;
+}
+
+.donation{
+	color: white;
+	background-color: #0b197b;
+	width: 400px;
+	height: 100%;
+    padding: 10px;
+    margin: 0; 
 }
 	
