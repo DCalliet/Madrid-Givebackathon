@@ -1,9 +1,13 @@
-/* Custom CSS for Project One */
+/* Custom CSS for Hackathon */
 
 
 
 form input{
 	color: black;
+}
+
+.greeting{
+	color: white;
 }
 
 .logo {
@@ -20,7 +24,7 @@ form input{
 	color:white;
 	line-height:350px;
 	text-align:center;
-	background:blue;
+	background: rgb(0,130,255);
 	
 }
 
@@ -28,6 +32,11 @@ form input{
 .col-md-6{
 width: 100%;
 text-align: center;
+
+}
+
+.past_donations{
+text-align: right;
 }
 
 .youve_donated{
@@ -41,5 +50,6 @@ padding: 20px;
 	height: 100%;
     padding: 10px;
     margin: 0; 
+	/* text-align: center; */
 }
 	
