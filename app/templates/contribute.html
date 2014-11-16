@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+	<h1> Hi!</h1>
+	
+	<p>Contribute Page</p>
+
+	<form action="" method="post" name="contribute">
+    {{ form.hidden_tag() }}
+    <p>
+        Give Your Account Some Contributions:<br><br>
+        Amount: {{ form.amount(size=40) }}
+        {% for error in form.amount.errors %}
+          <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+
+        Date: {{ form.date() }}
+        {% for error in form.date.errors %}
+          <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+
+        Cause: {{ form.cause() }}
+        {% for error in form.cause.errors %}
+          <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
+    </p>
+
+    <p><button type="submit"> Sign In</button></p>
+		</form>
+{% endblock %}
