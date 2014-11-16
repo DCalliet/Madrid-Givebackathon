@@ -32,7 +32,7 @@ def index():
 
 		obj = {
 			'desc': cont.name,
-			'date': cont.date,
+			'date': cont.date.strftime("%B %d, %y"),
 			'amount': cont.amount
 		}
 		contribs.append(obj)
