@@ -42,7 +42,7 @@
 				<li class="impact"><a href="{{ url_for('impact') }}">Impact</a></li>
               </ul>
 			  {% if user %}
-			  <p class = "greeting navbar-brand">Hello, {{user[0].name}}</p>
+			  <p class = "greeting navbar-brand">Hello, {{user.name}}</p>
 			{% endif %}
             </div>
 			
