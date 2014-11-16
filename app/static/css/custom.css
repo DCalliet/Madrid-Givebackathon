@@ -28,9 +28,6 @@ form input{
     background-color: rgb(0,130,255);
 }
 
-
-
-
 .greeting{
 	color: white;
 }
@@ -41,7 +38,6 @@ form input{
 }
 
 .circle{
-	
 	width:400px;
 	height:400px;
 	border-radius:50%;
@@ -51,13 +47,10 @@ form input{
 	text-align:center;
 	background: rgb(0,130,255);
 	margin-left: 24%;
-	
-}
+	}
 
 .col-md-6{
-/* width: 100%; */
 text-align: center;
-
 }
 
 .past_donations{
@@ -71,7 +64,6 @@ padding: 20px;
 .donation{
 	color: white;
 	background-color: #0b197b;
-	/* width: 400px; */
 	height: 100%;
     padding: 10px;
     margin: 0; 
@@ -81,7 +73,6 @@ padding: 20px;
 .past_donations{
 	color: white;
 	background-color: #0b197b;
-	/* width: 400px; */
 	height: 100%;
     padding: 10px;
 	border-left-style: solid;
@@ -89,5 +80,15 @@ padding: 20px;
 	border-left-width: 10px;
     margin: 0; 
 	text-align: center;
+}
+
+.donation_item{
+	width: 360px;
+	height:100px;
+	background-color: rgb(0,130,255);
+	font-size: 25px;
+	border-bottom:10px;
+	border-bottom-style:solid;
+	border-bottom-color: #0b197b;
 }
 	
