@@ -10,3 +10,5 @@ class ContribForm(Form):
 	amount = IntegerField('amount', validators=[DataRequired()])
 	date = DateField('date', format='%m/%d/%Y' ,validators=[DataRequired()])
 	cause = StringField('cause', validators=[DataRequired()])
+	cat = SelectField('cat', choices=[('education', 'education'), ('income', 'income'), ('health', 'health')], validators=[DataRequired()])
+	

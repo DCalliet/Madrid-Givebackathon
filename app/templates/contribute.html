@@ -22,6 +22,11 @@
         {% for error in form.cause.errors %}
           <span style="color: red;">[{{error}}]</span>
         {% endfor %}<br>
+
+        Cat: {{ form.cat() }}
+        {% for error in form.cat.errors %}
+          <span style="color: red;">[{{error}}]</span>
+        {% endfor %}<br>
     </p>
 
     <p><button type="submit"> Sign In</button></p>

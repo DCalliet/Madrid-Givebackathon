@@ -42,7 +42,26 @@ def index():
 @app.route('/impact')
 @login_required
 def impact():
-	return render_template('impact.html', title="impact")
+	user = g.user
+	me = User.query.get(user.id)
+	total = me.amount
+	health_obj = Contributions.query.filter_by(cat='health')
+	health = 0
+	for h in health_obj:
+		health += h.amount
+
+	income_obj = Contributions.query.filter_by(cat='income')
+	income = 0
+	for i in income_obj:
+		income += i.amount
+	
+	education_obj = Contributions.query.filter_by(cat='education')
+	education = 0
+	for e in education_obj:
+		education += e.amount
+	
+	obj = {'total': total, 'health': health, 'income': income, 'education': education}
+	return render_template('impact.html', title="impact", impact=obj)
 
 @app.route('/news')
 @login_required
@@ -100,11 +119,27 @@ def contribute():
 		amount = form.amount.data
 		date = form.date.data
 		cause = form.cause.data
-		contrib = Contributions(contributor=user,name=cause,date=date,amount=amount)
+		cat = form.cat.data
+		contrib = Contributions(contributor=user,name=cause,date=date,amount=amount, cat=cat)
 		total = user.amount + amount
 		user.amount = total
 		db.session.add(contrib)
 		db.session.commit()
 
 	return render_template('contribute.html', title="secret", form=form)
+
+@app.route('/clear')
+def clear():
+	logout_user()
+	users = User.query.all()
+	contribs = Contributions.query.all()
+
+	for u in users:
+		db.session.delete(u)
+
+	for c in contribs:
+		db.session.delete(c)
+
+	db.session.commit()
+	return "All Clear"
 

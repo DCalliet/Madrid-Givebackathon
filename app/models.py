@@ -32,6 +32,7 @@ class Contributions(db.Model):
 	date = db.Column(db.DateTime)
 	amount = db.Column(db.Integer)
 	name = db.Column(db.String(64))
+	cat = db.Column(db.String(64))
 
 	def __repr__(self):
 		return '<Contribution %r>' % (self.amount)

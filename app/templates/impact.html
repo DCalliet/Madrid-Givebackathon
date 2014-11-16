@@ -1,6 +1,200 @@
 {% extends "base.html" %}
 {% block content %}
-	<h1> Hi!</h1>
-	
-	<p>Impact Page</p>
+	<style>
+		body{
+			background-image: url("http://162.209.109.174/2014-11-16_06-02-19319JR3.png") 
+		}
+		.chart {
+			margin-left: 80px 
+		}
+		.chart rect{
+		  fill: #fc9f26;
+		}
+
+		.chart text {
+		  fill: white;
+		  font: 10px sans-serif;
+		  text-anchor: middle;
+		}
+
+		.axis text {
+			font: 15px sans-serif;
+		}
+
+		.axis path,
+		.axis line {
+			fill: none;
+			stroke: #FFF;
+			shape-rendering: crispEdges;
+		}
+	</style>
+
+	<div class="impact-chart-container">
+		<svg class="chart"></svg>
+	</div>
+	<div class="impact-desc-container">
+
+			<div class="form-group boost-group">
+				<label class="col-sm-5 control-label boost-label">Health: </label>
+				<div class="col-sm-6">
+					<input type="number" step="1" min="{{impact.health}}" class="form-control boost-input" id="health_boost_in" value="{{impact.health}}">
+				</div>
+				<input class="boost_slider" type="range" min="{{impact.health}}" max="1000" id="health_boost_rng" value="{{impact.health}}">
+  			</div>
+
+		
+
+			<div class="form-group boost-group">
+				<label class="col-sm-5 control-label boost-label">Education: </label>
+				<div class="col-sm-6">
+					<input type="number" step="1" min="{{impact.education}}" class="form-control boost-input" id="education_boost_in" value="{{impact.education}}">
+				</div>
+
+				<input class="boost_slider" type="range" min="{{impact.education}}" max="1000" id="education_boost_rng" value="{{impact.education}}">				
+  			</div>
+
+		
+		
+			<div class="form-group boost-group">
+				<label class="col-sm-5 control-label boost-label">Income: </label>
+				<div class="col-sm-6">
+					<input type="number" step="1" min="{{impact.income}}" class="form-control boost-input" id="income_boost_in" value="{{impact.income}}">
+				</div>
+
+				<input class="boost_slider" type="range" min="{{impact.income}}" max="1000" id="income_boost_rng" value="{{impact.income}}">
+
+  			</div>
+
+
+
+		<div class="boost-submit btn btn-block btn-lg btn-warning">Boost A Cause!</div>
+	</div>
+<script type="text/javascript">
+$('.boost-submit').on('click', function(){
+	var data = {{ impact|tojson|safe}};
+	var min_h = data.health;
+	var min_i = data.income;
+	var min_e = data.education;
+	var new_h = $('#health_boost_in').val();
+	var new_i = $('#income_boost_in').val();
+	var new_e = $('#education_boost_in').val();
+	var day = new Date()
+	var today = day.getMonth() + "/" + day.getDate() + "/" + day.getFullYear()
+	var xmlhttp = new XMLHttpRequest();
+	var send_Data = {}
+	if ((new_i - min_i) > 0){
+		send_Data['name'] = "Boost Income Causes!";
+		send_Data['date'] = today;
+		send_Data['amount'] = new_i - min_i;
+		send_Data['cat'] = 'income';
+		xmlhttp.open("POST","contribute",true);
+		xmlhttp.send(send_Data);
+	}
+
+	if ((new_e- min_e) > 0){
+		send_Data['name'] = "Boost Education Causes!";
+		send_Data['date'] = today;
+		send_Data['amount'] = new_e - min_e;
+		send_Data['cat'] = 'education';
+		xmlhttp.open("POST","contribute",true);
+		xmlhttp.send(send_Data);
+	}
+
+	if ((new_h- min_h) > 0){
+		send_Data['name'] = "Boost Health Causes!";
+		send_Data['date'] = today;
+		send_Data['amount'] = new_h - min_h;
+		send_Data['cat'] = 'health';
+		xmlhttp.open("POST","contribute",true);
+		xmlhttp.send(send_Data);
+	}
+
+
+});
+
+</script>
+
+<script type="text/javascript">
+$('.boost_slider').on('change', function(){
+	var name = this.id;
+	if(name == "income_boost_rng"){
+		$('#income_boost_in').val($(this).val());
+	}else if ( name == "education_boost_rng"){
+		$('#education_boost_in').val($(this).val());
+	}else if ( name == "health_boost_rng"){
+		$('#health_boost_in').val($(this).val());
+	}
+});
+
+$('.boost-input').on('change', function(){
+	var name = this.id;
+	if(name == "income_boost_in"){
+		$('#income_boost_rng').val($(this).val());
+	}else if ( name == "education_boost_in"){
+		$('#education_boost_rng').val($(this).val());
+	}else if ( name == "health_boost_in"){
+		$('#health_boost_rng').val($(this).val());
+	}
+});
+</script>
+
+
+<script type="text/javascript">
+	var obj = {{ impact|tojson|safe }};
+	var data = [ 
+		{name: 'health', value: obj.health}, 
+		{name: 'education', value: obj.education}, 
+		{name: 'income', value: obj.income}];
+
+	var margin = {top: 20, right: 30, bottom: 30, left: 40},
+    width = 500 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], .1);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .ticks(10);
+
+var chart = d3.select(".chart")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  x.domain(data.map(function(d) { return d.name; }));
+  y.domain([0, d3.max(data, function(d){return d.value})+100]);
+
+  chart.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  chart.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+
+  chart.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.name); })
+      .attr("y", function(d) { return y(d.value); })
+      .attr("height", function(d) { return height - y(d.value); })
+      .attr("width", x.rangeBand());
+
+function type(d) {
+  d.value = +d.value; // coerce to number
+  return d;
+}
+	</script>
 {% endblock %}
