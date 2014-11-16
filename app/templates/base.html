@@ -41,10 +41,11 @@
                 <li class="give"><a href="{{ url_for('give') }}">Give</a></li>
 				<li class="impact"><a href="{{ url_for('impact') }}">Impact</a></li>
               </ul>
-            </div>
-			{% if user %}
-			  <p class = "greeting">Hello, {{user[0].name}}</p>
+			  {% if user %}
+			  <p class = "greeting navbar-brand">Hello, {{user[0].name}}</p>
 			{% endif %}
+            </div>
+			
           </div>
         </nav>
 		
