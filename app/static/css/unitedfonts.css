@@ -1,0 +1,66 @@
+@font-face {
+	font-family: 'Meta';
+	src: url('https://assets.unitedway.org/fonts/MetaWebPro-Bold.eot?#iefix"') format('embedded-opentype'), 
+			url('https://assets.unitedway.org/fonts/MetaWebPro-Bold.woff') format('woff'), 
+			url('../fonts/MetaCompPro-Bold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Meta';
+	src: url('https://assets.unitedway.org/fonts/MetaWebPro-BoldIta.eot?#iefix"') format('embedded-opentype'), url('https://assets.unitedway.org/fonts/MetaWebPro-BoldIta.woff') format('woff'), url('https://assets.unitedway.org/fonts/MetaCompPro-BoldIta.ttf') format('truetype');
+	font-weight: bold;
+	font-style: italic;
+}
+@font-face {
+	font-family: 'Meta';
+	src: url('https://assets.unitedway.org/fonts/MetaScWebPro-Book.eot?#iefix"') format('embedded-opentype'),  url('https://assets.unitedway.org/fonts/MetaScWebPro-Book.woff') format('woff'), url('https://assets.unitedway.org/fonts/MetaCompPro-Book.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Meta';
+	src: url('https://assets.unitedway.org/fonts/MetaScWebPro-BookIta.eot?#iefix"') format('embedded-opentype'),  url('https://assets.unitedway.org/fonts/MetaScWebPro-BookIta.woff') format('woff'), url('https://assets.unitedway.org/fonts/MetaCompPro-BookIta.ttf') format('truetype');
+	font-weight: normal;
+	font-style: italic;
+}
+@font-face{
+font-family:"Trade Gothic W02_n7";
+src:url("https://assets.unitedway.org/fonts/e4693908-7208-4b04-93c4-8d004c3b4e1f.eot?#iefix") format('embedded-opentype')}
+@font-face{
+font-family:"Trade Gothic W02";
+src:url("https://assets.unitedway.org/fonts/e4693908-7208-4b04-93c4-8d004c3b4e1f.eot?#iefix");
+src:url("https://assets.unitedway.org/fonts/e4693908-7208-4b04-93c4-8d004c3b4e1f.eot?#iefix") format('embedded-opentype'),url("https://assets.unitedway.org/fonts/e2fbc63c-e7b1-4828-b0b6-275131d16fd0.woff") format("woff"),url("https://assets.unitedway.org/fonts/805d9356-a4a5-46df-8390-957c803e33bc.ttf") format("truetype"),url("https://assets.unitedway.org/fonts/df0f9c50-3ce3-4b1f-8120-074ca66b83b1.svg#df0f9c50-3ce3-4b1f-8120-074ca66b83b1") format("svg");
+font-weight: 700;
+font-style: normal;
+}
+@font-face{
+font-family:"Trade Gothic W02_o7";
+src:url("https://assets.unitedway.org/fonts/b8a5625b-c9e8-43f5-8166-d6adcb27800b.eot?#iefix") format('embedded-opentype')}
+@font-face{
+font-family:"Trade Gothic W02";
+src:url("https://assets.unitedway.org/fonts/b8a5625b-c9e8-43f5-8166-d6adcb27800b.eot?#iefix");
+src:url("https://assets.unitedway.org/fonts/b8a5625b-c9e8-43f5-8166-d6adcb27800b.eot?#iefix") format('embedded-opentype'),url("https://assets.unitedway.org/fonts/02ebc07e-f343-4fb9-acc8-211360a40920.woff") format("woff"),url("../fonts/cc9bf793-a67d-49e0-ae6e-f8797c34abc6.ttf") format("truetype"),url("https://assets.unitedway.org/fonts/f04cc819-a804-4457-ae2d-b8e4a45747b0.svg#f04cc819-a804-4457-ae2d-b8e4a45747b0") format("svg");
+font-weight: 700;
+font-style: oblique;
+}
+@font-face{
+font-family:"Trade Gothic W02_n4";
+src:url("https://assets.unitedway.org/fonts/54d50729-2ab7-49d5-a74c-b604d41c0c59.eot?#iefix") format('embedded-opentype')}
+@font-face{
+font-family:"Trade Gothic W02";
+src:url("https://assets.unitedway.org/fonts/54d50729-2ab7-49d5-a74c-b604d41c0c59.eot?#iefix");
+src:url("https://assets.unitedway.org/fonts/54d50729-2ab7-49d5-a74c-b604d41c0c59.eot?#iefix") format('embedded-opentype'),url("https://assets.unitedway.org/fonts/0212a948-10f0-4e92-ad88-f19648a92b4a.woff") format("woff"),url("https://assets.unitedway.org/fonts/5e7c3b52-1246-48a3-a019-a0492c7f9e19.ttf") format("truetype"),url("https://assets.unitedway.org/fonts/8115c2cd-df4a-4fc1-8a70-5982b7d810ab.svg#8115c2cd-df4a-4fc1-8a70-5982b7d810ab") format("svg");
+font-weight: 400;
+font-style: normal;
+}
+@font-face{
+font-family:"Trade Gothic W02_o4";
+src:url("https://assets.unitedway.org/fonts/da6b1bd9-b4b7-4567-93ed-fa0a9c602e0e.eot?#iefix") format('embedded-opentype')}
+@font-face{
+font-family:"Trade Gothic W02";
+src:url("https://assets.unitedway.org/fonts/da6b1bd9-b4b7-4567-93ed-fa0a9c602e0e.eot?#iefix");
+src:url("https://assets.unitedway.org/fonts/da6b1bd9-b4b7-4567-93ed-fa0a9c602e0e.eot?#iefix") format('embedded-opentype'),url("https://assets.unitedway.org/fonts/0c1d41ae-61a2-4230-9b86-b6ba41e18884.woff") format("woff"),url("https://assets.unitedway.org/fonts/57fb314c-6f9b-4825-932e-fe4a2db62aa4.ttf") format("truetype"),url("https://assets.unitedway.org/fonts/a39984ef-4c91-4949-8937-873bca0dae3a.svg#a39984ef-4c91-4949-8937-873bca0dae3a") format("svg");
+font-weight: 400;
+font-style: oblique;
+}
