@@ -66,52 +66,31 @@
   			</div>
 
 
+  		<form id="boost_json" name="boost" action="boost" method="POST">
+  				<input type="submit" class="boost-submit btn btn-block btn-lg btn-warning"></input>
+		</form>
 
-		<div class="boost-submit btn btn-block btn-lg btn-warning">Boost A Cause!</div>
+
 	</div>
 <script type="text/javascript">
-$('.boost-submit').on('click', function(){
-	var data = {{ impact|tojson|safe}};
-	var min_h = data.health;
-	var min_i = data.income;
-	var min_e = data.education;
-	var new_h = $('#health_boost_in').val();
-	var new_i = $('#income_boost_in').val();
-	var new_e = $('#education_boost_in').val();
-	var day = new Date()
-	var today = day.getMonth() + "/" + day.getDate() + "/" + day.getFullYear()
-	var xmlhttp = new XMLHttpRequest();
-	var send_Data = {}
-	if ((new_i - min_i) > 0){
-		send_Data['name'] = "Boost Income Causes!";
-		send_Data['date'] = today;
-		send_Data['amount'] = new_i - min_i;
-		send_Data['cat'] = 'income';
-		xmlhttp.open("POST","contribute",true);
-		xmlhttp.send(send_Data);
-	}
+	$('#boost_json').submit( function(e){
+			var data = {{ impact|tojson|safe}};
+			var min_h = data.health;
+			var min_i = data.income;
+			var min_e = data.education;
+			var new_h = $('#health_boost_in').val();
+			var new_i = $('#income_boost_in').val();
+			var new_e = $('#education_boost_in').val();
+			var day = new Date();
+			var today = day.getMonth() + "/" + day.getDate() + "/" + day.getFullYear();
 
-	if ((new_e- min_e) > 0){
-		send_Data['name'] = "Boost Education Causes!";
-		send_Data['date'] = today;
-		send_Data['amount'] = new_e - min_e;
-		send_Data['cat'] = 'education';
-		xmlhttp.open("POST","contribute",true);
-		xmlhttp.send(send_Data);
-	}
+			$(this).append('<input type="hidden" name="name" value="Boost Income Causes!" /> ');
+			$(this).append('<input type="hidden" name="date" value="'+ today +'" /> ');
+			$(this).append('<input type="hidden" name="amount" value="'+(new_i - min_i)+'" /> ');
+			$(this).append('<input type="hidden" name="cat" value="income" /> ');
 
-	if ((new_h- min_h) > 0){
-		send_Data['name'] = "Boost Health Causes!";
-		send_Data['date'] = today;
-		send_Data['amount'] = new_h - min_h;
-		send_Data['cat'] = 'health';
-		xmlhttp.open("POST","contribute",true);
-		xmlhttp.send(send_Data);
-	}
-
-
-});
-
+			return true;
+	});
 </script>
 
 <script type="text/javascript">

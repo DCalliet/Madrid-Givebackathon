@@ -2,9 +2,10 @@ from flask import render_template, flash, redirect, session, url_for, request, g
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from app import app, db, lm, oid
 from forms import LoginForm, ContribForm
-from models import User, Contributions 
+from models import User, Contributions
+import json 
 
-
+tempStorage = {}
 
 @app.before_request
 def before_request():
@@ -127,6 +128,43 @@ def contribute():
 		db.session.commit()
 
 	return render_template('contribute.html', title="secret", form=form)
+
+@app.route('/boost', methods=['GET', 'POST'])
+@login_required
+def boost():
+	user = g.user
+	tempStorage['cause'] = request.form['name']
+	tempStorage['date'] = request.form['date']
+	tempStorage['amount'] = request.form['amount']
+	tempStorage['cat'] = request.form['cat']
+	
+	return redirect(url_for('payment'))
+
+@app.route('/pay', methods=['GET', 'POST'])
+@login_required
+def payment():
+	import simplify
+
+	if request.method == 'POST':
+		simplify.public_key = "sbpb_ZDgxNTYzOTctYjFmZi00MjVlLThkOTEtYzg5NTc4ZDJmYzY3"
+		simplify.private_key = "KtXGePfh/AYKyOYCF2XC5ka7sTuDriZD9aP4flhyget5YFFQL0ODSXAOkNtXTToq"
+
+		payment = simplify.Payment.create({
+			"card" : {
+				"number": request.form['cc-number'],
+				"expMonth": request.form['cc-exp-month'],
+				"expYear": request.form['cc-exp-year'],
+				"cvc": request.form['cc-cvc']
+			},
+			"amount" : tempStorage['amount'],
+			"description" : tempStorage['cause'],
+			"currency" : "USD"
+		})
+		
+		if payment.paymentStatus == 'APPROVED':
+			return redirect(url_for('index'))
+
+	return render_template('payment.html', title="payment")
 
 @app.route('/clear')
 def clear():
