@@ -35,8 +35,7 @@ def index():
 			'date': cont.date.strftime("%B %Y"),
 			'amount': cont.amount
 		}
-		contribs.append(obj)
-		print contribs
+		contribs =[obj] + contribs
 	data = {'name':user.name, 'total': user.amount, 'contribs':contribs}
 	return render_template('index.html', title="home", user=data)
 

@@ -3,7 +3,12 @@
 
 <!-- Calls CSS -->
 		<link href="static/css/bootstrap.min.css" rel="stylesheet">
-		<link href="static/css/custom.css" rel="stylesheet">	
+		<link href="static/css/custom.css" rel="stylesheet">
+		<style>
+		body{
+			background-image: url("http://162.209.109.174/2014-11-16_06-02-19319JR3.png") 
+		}
+		</style>	
 
 
 <head>
@@ -15,15 +20,19 @@
 	<div class = "row">
 		<div class = "donation col-md-8">
 			<h1 class= "youve_donated"><strong>You've Donated</strong></h1>
-			<div class = "circle">${{user.total}}</div>
+			<div class = "circle"><p class="donation_total">${{user.total}}</p></div>
 		</div>
 		
 		<div class= "col-md-4 past_donations">
-			<h1><strong>Past Donations</strong></h1>
 			{% for c in user.contribs %}
 			<div class = "donation_item col-md-12">
-			<p>{{c.date}}: ${{c.amount}}</p>
-			<p>{{c.desc}}</p>
+				<div class="div_pd_desc">
+					<p class="p_pd_date">{{c.date}}</p>
+					<p class="p_pd_desc"> {{c.desc}}</p>
+				</div>
+				<div class="div_pd_amount"> 
+					<p>${{c.amount}}</p>
+				</div>
 			</div>
 			{% endfor %}
 	
