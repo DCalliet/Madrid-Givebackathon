@@ -27,7 +27,7 @@ def index():
 	user = g.user
 
 	data = [
-		{'name':"Akeda", 'total': "340.35", 'contribs':[{'name':"Learn 2 Live", 'desc':"Help kids and stuff", 'amount':40}, {'name':"Carjacking", 'desc':"Refurbished cars", 'amount':32.11}, {'name':"Hopelessly Homeless", 'desc':"Homeless People", 'amount':22.60}, {'name':"Hungry Hippos", 'desc':"Feed People", 'amount':20.45}]}
+		{'name':user.name, 'total': user.amount, 'contribs':[{'name':"Learn 2 Live", 'desc':"Help kids and stuff", 'amount':40}, {'name':"Carjacking", 'desc':"Refurbished cars", 'amount':32.11}, {'name':"Hopelessly Homeless", 'desc':"Homeless People", 'amount':22.60}, {'name':"Hungry Hippos", 'desc':"Feed People", 'amount':20.45}]}
 	]
 	return render_template('index.html', title="home", user=data)
 
@@ -59,7 +59,7 @@ def login():
 
 @oid.after_login
 def after_login(resp):
-	print resp
+
 	if resp.email is None or resp.email == "":
 		flash('Invalid login. Please try again.')
 		return redirect(url_for('login'))
@@ -68,7 +68,6 @@ def after_login(resp):
 		name = resp.nickname
 		if name is None or name == "":
 			name = resp.email.split('@')[0]
-			print 'hi'
 		user = User(name=name, email=resp.email, amount=0)
 		db.session.add(user)
 		db.session.commit()
