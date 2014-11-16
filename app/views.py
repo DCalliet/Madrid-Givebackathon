@@ -1,8 +1,8 @@
 from flask import render_template, flash, redirect, session, url_for, request, g
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from app import app, db, lm, oid
-from forms import LoginForm, EditForm
-from models import User 
+from forms import LoginForm, ContribForm
+from models import User, Contributions 
 
 
 
@@ -16,7 +16,6 @@ def before_request():
 @lm.user_loader
 def load_user(id):
 	user = User.query.get(int(id))
-	print user
 	return user
 
 
@@ -25,10 +24,20 @@ def load_user(id):
 @login_required
 def index():
 	user = g.user
+	me = User.query.get(user.id)
+	print me
+	contributions = Contributions.query.filter_by(contributor=me)
+	contribs = []
+	for cont in contributions:
 
-	data = [
-		{'name':user.name, 'total': user.amount, 'contribs':[{'name':"Learn 2 Live", 'desc':"Help kids and stuff", 'amount':40}, {'name':"Carjacking", 'desc':"Refurbished cars", 'amount':32.11}, {'name':"Hopelessly Homeless", 'desc':"Homeless People", 'amount':22.60}, {'name':"Hungry Hippos", 'desc':"Feed People", 'amount':20.45}]}
-	]
+		obj = {
+			'desc': cont.name,
+			'date': cont.date,
+			'amount': cont.amount
+		}
+		contribs.append(obj)
+		print contribs
+	data = {'name':user.name, 'total': user.amount, 'contribs':contribs}
 	return render_template('index.html', title="home", user=data)
 
 @app.route('/impact')
@@ -82,3 +91,21 @@ def after_login(resp):
 def logout():
 	logout_user()
 	return redirect(url_for('index'))
+
+@app.route('/contribute', methods=['GET', 'POST'])
+@login_required
+def contribute():
+	user = g.user
+	form = ContribForm()
+	if form.validate_on_submit():
+		amount = form.amount.data
+		date = form.date.data
+		cause = form.cause.data
+		contrib = Contributions(contributor=user,name=cause,date=date,amount=amount)
+		total = user.amount + amount
+		user.amount = total
+		db.session.add(contrib)
+		db.session.commit()
+
+	return render_template('contribute.html', title="secret", form=form)
+
