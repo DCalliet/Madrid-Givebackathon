@@ -21,7 +21,7 @@
 		<div class= "col-md-4 past_donations">
 			<h1><strong>Past Donations</strong></h1>
 			{% for c in user.contribs %}
-			<div class = "donation_item">
+			<div class = "donation_item col-md-12">
 			<p>{{c.date}}: ${{c.amount}}</p>
 			<p>{{c.desc}}</p>
 			</div>
